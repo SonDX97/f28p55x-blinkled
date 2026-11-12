@@ -1,0 +1,16 @@
+# Build output
+build/
+Debug/
+Release/
+CPU1_LAUNCHXL_FLASH/
+CPU1_LAUNCHXL_RAM/
+*.obj
+*.out
+*.map
+*.pp
+*.d
+
+# CCS / Eclipse workspace metadata
+.metadata/
+.settings/
+.launches/

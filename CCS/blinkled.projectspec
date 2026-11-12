@@ -1,0 +1,39 @@
+<projectSpec>
+  <!--
+    CCS project spec for the LAUNCHXL-F28P55X blink LED example.
+
+    Import in Code Composer Studio:
+      File > Import Project(s)... > browse to this repository > select "blinkled".
+    The project is self-contained (device support + driverlib sources are in this
+    repository), C2000Ware does NOT need to be installed.
+  -->
+  <project
+        name="f28p55x_blinkled"
+        device="TMS320F28P550SJ9"
+        connection="TIXDS110_Connection.xml"
+        cgtVersion="22.6.1.LTS"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        >
+    <configuration name="CPU1_LAUNCHXL_FLASH"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/driverlib -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu1 --define=DEBUG --define=CPU1 --define=_FLASH --define=_LAUNCHXL_F28P55X --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063 -g"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x3F8 --heap_size=0x200 --define=_FLASH"/>
+    <configuration name="CPU1_LAUNCHXL_RAM"
+        compilerBuildOptions="--opt_level=off -I${PROJECT_ROOT} -I${PROJECT_ROOT}/device -I${PROJECT_ROOT}/driverlib -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu1 --define=DEBUG --define=CPU1 --define=RAM --define=_LAUNCHXL_F28P55X --gen_func_subsections=on --diag_warning=225 --diag_suppress=10063 -g"
+        linkerBuildOptions="--entry_point code_start --stack_size=0x3F8 --heap_size=0x200 --define=RAM"/>
+
+    <!-- Application -->
+    <file action="copy" path="../main.c" targetDirectory="" />
+
+    <!-- Device support (from C2000Ware device_support/f28p55x/common) -->
+    <file action="copy" path="../device" targetDirectory="" />
+
+    <!-- Driverlib sources (from C2000Ware driverlib/f28p55x/driverlib) -->
+    <file action="copy" path="../driverlib" targetDirectory="" />
+
+    <!-- Linker command files -->
+    <file action="copy" path="../cmd/28p55x_generic_flash_lnk.cmd" targetDirectory="" applicableConfigurations="CPU1_LAUNCHXL_FLASH" />
+    <file action="copy" path="../cmd/28p55x_generic_ram_lnk.cmd"   targetDirectory="" applicableConfigurations="CPU1_LAUNCHXL_RAM" />
+  </project>
+</projectSpec>
